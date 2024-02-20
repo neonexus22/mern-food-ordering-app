@@ -8,6 +8,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import LoadingButton from "@/components/LoadingButton";
@@ -15,10 +16,10 @@ import { Button } from "@/components/ui/button";
 
 const formSchema = z.object({
   email: z.string().email().optional(),
-  name: z.string().min(1, "Name is required."),
-  addressLine1: z.string().min(1, "Address Line 1 is required."),
-  country: z.string().min(1, "Country is required."),
-  city: z.string().min(1, "City is required."),
+  name: z.string().min(3, "Name is too short."),
+  addressLine1: z.string().min(3, "Address Line 1 is too short."),
+  country: z.string().min(3, "Country is too short."),
+  city: z.string().min(3, "City is too short."),
 });
 
 type UserFormData = z.infer<typeof formSchema>;
@@ -64,6 +65,7 @@ const UserProfileForm = ({ onSave, isLoading }: UserProfileFormProps) => {
                 <FormControl>
                   <Input {...field} className="bg-white" />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -77,6 +79,7 @@ const UserProfileForm = ({ onSave, isLoading }: UserProfileFormProps) => {
                   <FormControl>
                     <Input {...field} className="bg-white" />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -89,6 +92,7 @@ const UserProfileForm = ({ onSave, isLoading }: UserProfileFormProps) => {
                   <FormControl>
                     <Input {...field} className="bg-white" />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -101,6 +105,7 @@ const UserProfileForm = ({ onSave, isLoading }: UserProfileFormProps) => {
                   <FormControl>
                     <Input {...field} className="bg-white w-full" />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />

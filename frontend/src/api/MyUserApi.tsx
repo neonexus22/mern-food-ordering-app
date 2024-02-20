@@ -25,4 +25,23 @@ const useCreateMyUser = () => {
   });
 };
 
-export { useCreateMyUser };
+type UpdateMyUserRequest = {
+  name: string;
+  addressLine1: string;
+  city: string;
+  country: string;
+};
+
+const useUpdateMyUser = () => {
+  const { getAccessTokenSilently } = useAuth0();
+  return useMutation(async (formData: UpdateMyUserRequest) => {
+    const accessToken = await getAccessTokenSilently();
+    return axios.put(`${API_BASE_URL}/api/my/user`, formData, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+  });
+};
+
+export { useCreateMyUser, useUpdateMyUser };
