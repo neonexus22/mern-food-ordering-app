@@ -7,13 +7,15 @@ const UserProfilePage = () => {
     mutate: updateUser,
     isLoading,
     isSuccess,
-    isError,
+    error,
+    reset,
   } = useUpdateMyUser();
 
   if (isSuccess) {
     toast.success("User updated successfully");
-  } else if (isError) {
-    toast.error("Error updating user");
+  } else if (error) {
+    toast.error(error.toString());
+    reset();
   }
 
   return <UserProfileForm onSave={updateUser} isLoading={isLoading} />;
