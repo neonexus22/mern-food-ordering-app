@@ -1,8 +1,22 @@
+import { User } from "@/types";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
+
+export const useGetMyUser = () => {
+  const { getAccessTokenSilently } = useAuth0();
+  return useQuery<User, Error>("my-user", async () => {
+    const accessToken = await getAccessTokenSilently();
+    const { data } = await axios.get(`${API_BASE_URL}/api/my/user`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return data;
+  });
+};
 
 type CreateUserRequest = {
   auth0Id: string;

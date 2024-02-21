@@ -1,11 +1,13 @@
-import { useUpdateMyUser } from "@/api/MyUserApi";
+import { useGetMyUser, useUpdateMyUser } from "@/api/MyUserApi";
 import UserProfileForm from "@/forms/user-profile-form/UserProfileForm";
 import { toast } from "sonner";
 
 const UserProfilePage = () => {
+  const { data: currentUser, isLoading: isGetLoading } = useGetMyUser();
+
   const {
     mutate: updateUser,
-    isLoading,
+    isLoading: isUpdateLoading,
     isSuccess,
     error,
     reset,
@@ -17,8 +19,17 @@ const UserProfilePage = () => {
     toast.error(error.toString());
     reset();
   }
+  if (isGetLoading) return <div>Loading...</div>;
 
-  return <UserProfileForm onSave={updateUser} isLoading={isLoading} />;
+  if (!currentUser) return <div>No user found</div>;
+
+  return (
+    <UserProfileForm
+      onSave={updateUser}
+      isLoading={isUpdateLoading}
+      currentUser={currentUser}
+    />
+  );
 };
 
 export default UserProfilePage;
