@@ -7,6 +7,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Trash } from "lucide-react";
 import { useFormContext } from "react-hook-form";
 
 type MenuItemInputProps = {
@@ -52,10 +53,12 @@ const MenuItemInput = ({ index, removeMenuItem }: MenuItemInputProps) => {
       />
       <Button
         type="button"
-        className="bg-red-500 max-h-fit"
+        size="icon"
+        variant="destructive"
+        className="max-h-fit"
         onClick={removeMenuItem}
       >
-        Remove
+        <Trash className="size-4" />
       </Button>
     </div>
   );

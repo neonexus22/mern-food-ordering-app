@@ -41,7 +41,7 @@ const MenuSection = () => {
           })
         }
       >
-        Add Menu Item
+        + Add Menu Item
       </Button>
     </div>
   );
