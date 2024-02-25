@@ -12,7 +12,8 @@ import { CircleUserRound, Menu } from "lucide-react";
 import MobileNavLinks from "./MobileNavLinks";
 
 const MobileNav = () => {
-  const { isAuthenticated, loginWithRedirect, user } = useAuth0();
+  const { isAuthenticated, loginWithRedirect, user, isLoading } = useAuth0();
+  if (isLoading) return null;
   return (
     <Sheet>
       <SheetTrigger>
