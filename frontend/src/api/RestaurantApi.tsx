@@ -14,6 +14,7 @@ export const useSearchRestaurant = (
   params.set("searchQuery", searchState.searchQuery);
   params.set("page", searchState.page.toString());
   params.set("selectedCuisines", searchState.selectedCuisines.join(","));
+  params.set("sortOption", searchState.sortOption);
 
   return useQuery<RestaurantSearchResponse, Error>(
     ["get-restaurants-by-city", city, searchState],

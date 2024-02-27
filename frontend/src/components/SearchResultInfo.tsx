@@ -16,7 +16,6 @@ const SearchResultInfo = ({ total, city }: SearchResultInfoProps) => {
           Change Location
         </Link>
       </span>
-      insert sort drowdown here
     </div>
   );
 };
