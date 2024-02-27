@@ -3,10 +3,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 type MenuItemProps = {
   menuItem: MenuItemType;
+  addToCart: () => void;
 };
-const MenuItem = ({ menuItem }: MenuItemProps) => {
+const MenuItem = ({ menuItem, addToCart }: MenuItemProps) => {
   return (
-    <Card className="cursor-pointer">
+    <Card className="cursor-pointer" onClick={addToCart}>
       <CardHeader>
         <CardTitle>{menuItem.name}</CardTitle>
       </CardHeader>
