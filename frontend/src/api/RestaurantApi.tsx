@@ -1,9 +1,24 @@
 import { SearchState } from "@/pages/SearchPage";
-import { RestaurantSearchResponse } from "@/types";
+import { Restaurant, RestaurantSearchResponse } from "@/types";
 import axios from "axios";
 import { useQuery } from "react-query";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
+
+export const useGetRestaurant = (restaurantId?: string) => {
+  return useQuery<Restaurant, Error>(
+    ["fetch-restaurant", restaurantId],
+    async () => {
+      const { data } = await axios.get(
+        `${API_BASE_URL}/api/restaurant/${restaurantId}`
+      );
+      return data;
+    },
+    {
+      enabled: !!restaurantId,
+    }
+  );
+};
 
 export const useSearchRestaurant = (
   searchState: SearchState,
